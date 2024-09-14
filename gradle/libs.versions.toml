@@ -1,0 +1,55 @@
+[versions]
+agp = "8.6.0"
+anvil = "2.4.8"
+appcompat = "1.7.0"
+autoservice = "1.0"
+composeCompiler = "1.5.1"
+coreKtx = "1.13.1"
+dagger = "2.47"
+espressoCore = "3.6.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+kotlin = "1.9.20"
+ksp = "1.9.0-1.0.12"
+material = "1.12.0"
+navigation = "2.7.0"
+retained = "1.0.2"
+sqldelight = "2.0.0"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+anvil-compiler-api = { module = "com.squareup.anvil:compiler-api", version.ref = "anvil" }
+anvil-compiler-utils = { module = "com.squareup.anvil:compiler-utils", version.ref = "anvil" }
+autoservice = { module = "com.google.auto.service:auto-service", version.ref = "autoservice" }
+autoservice-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoservice" }
+composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+composeRuntime = { module = "androidx.compose.runtime:runtime", version = "1.5.0" }
+daggerApi = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+fragment = { module = "androidx.fragment:fragment", version = "1.6.1" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.7.1" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+navigation = { module = "androidx.navigation:navigation-fragment", version.ref = "navigation" }
+retained-fragment = { module = "dev.marcellogalhardo:retained-fragment", version.ref = "retained" }
+retained-view = { module = "dev.marcellogalhardo:retained-view", version.ref = "retained" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqldelight-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+turbine = { module = "app.cash.turbine:turbine", version = "1.0.0" }
+viewmodelktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.1" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+molecule = { id = "app.cash.molecule", version = "1.2.0" }
+sqldelight = { id = "app.cash.sqldelight", version = "2.0.0" }
