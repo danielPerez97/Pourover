@@ -9,6 +9,17 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            name = "scaler-gradle-plugin"
+            url = uri("https://maven.pkg.github.com/danielPerez97/Scaler")
+            credentials {
+                val keystoreFile = file("keystore.properties") // Do not check this file into version control since it will contain sensitive information
+                val keystoreProperties = java.util.Properties()
+                keystoreProperties.load(java.io.FileInputStream(keystoreFile))
+                username = keystoreProperties.getProperty("githubUser") ?: error("No username")
+                password = keystoreProperties.getProperty("githubToken") ?: error("No token")
+            }
+        }
     }
 }
 dependencyResolutionManagement {
