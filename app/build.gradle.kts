@@ -9,13 +9,13 @@ plugins {
 
 scaler {
     android {
-        app(applicationId = "dev.danperez.scaler", namespace = "dev.danperez.scaler")
+        app(applicationId = "dev.danperez.foursix", namespace = "dev.danperez.foursix")
         features {
             navigation()
-            compose("2023.10.01") {
+            compose("2024.09.00") {
+                activity()
                 includeTestArtifact()
             }
-            provideApiUrlInBuildConfig("http://${InetAddress.getLocalHost().hostAddress}:8080")
             retained(RetainedType.Activity, RetainedType.Fragment)
         }
     }
@@ -35,6 +35,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(project(":foursixcore"))
 
     // Dagger
     implementation(libs.dagger.api)
