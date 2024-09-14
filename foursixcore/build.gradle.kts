@@ -4,7 +4,14 @@ plugins {
 
 kotlin {
     // Define targets for different platforms
-    jvm()
+    jvm {
+        compilations.all {
+            kotlinOptions {
+                // Set the target JVM bytecode version to 1.8 for Java 8 compatibility
+                jvmTarget = "1.8"
+            }
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -33,7 +40,7 @@ kotlin {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_17
 }
 
