@@ -3,7 +3,7 @@ agp = "8.6.0"
 anvil = "2.4.9"
 appcompat = "1.7.0"
 autoservice = "1.0"
-composeCompiler = "1.5.1"
+composeCompiler = "1.5.5"
 coreKtx = "1.13.1"
 dagger = "2.47"
 espressoCore = "3.6.1"
@@ -20,7 +20,7 @@ sqldelight = "2.0.0"
 
 scaler-compilersdkVersion = "34"
 scaler-minsdkVersion = "28"
-scaler-targetsdkVersion = "33"
+scaler-targetsdkVersion = "34"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }

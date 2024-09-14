@@ -1,37 +1,29 @@
+import dev.danperez.sgp.handlers.AndroidFeaturesHandler.RetainedType
+import java.net.InetAddress
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("dev.danperez.scaler")
 }
 
-android {
-    namespace = "dev.danperez.foursix"
-    compileSdk = 34
-
-    defaultConfig {
-        applicationId = "dev.danperez.foursix"
-        minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+scaler {
+    android {
+        app(applicationId = "dev.danperez.scaler", namespace = "dev.danperez.scaler")
+        features {
+            navigation()
+            compose("2023.10.01") {
+                includeTestArtifact()
+            }
+            provideApiUrlInBuildConfig("http://${InetAddress.getLocalHost().hostAddress}:8080")
+            retained(RetainedType.Activity, RetainedType.Fragment)
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    features {
+        dagger(useDaggerCompiler = true) {
+
+        }
+        okHttp()
     }
 }
 
