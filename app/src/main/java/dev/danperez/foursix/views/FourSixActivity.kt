@@ -3,7 +3,7 @@ package dev.danperez.foursix.views
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -66,14 +66,14 @@ fun Screen(
 )
 {
     Surface(modifier) {
-        Box(
-            contentAlignment = Alignment.Center,
+        Column(
+            verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize(),
         ) {
             if(model.grams.text.isNotEmpty()) {
                 Row(
                     verticalAlignment = Alignment.Top,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     PoursData(
@@ -85,14 +85,14 @@ fun Screen(
             } else {
                 Text(
                     text = "Please enter your beans in grams.",
-                    Modifier.align(Alignment.Center),
+                    modifier = Modifier,
                 )
             }
 
             ControllerView(
                 model = model,
                 onEvent = onEvent,
-                modifier = Modifier.align(Alignment.BottomCenter)
+                modifier = Modifier
             )
         }
     }
@@ -157,7 +157,7 @@ fun ControllerView(
         }
         TextField(
             value = model.grams,
-            label = { Text("Grams") },
+            label = { Text("Beans(Grams)") },
             onValueChange = {
                 if(it.text.isEmpty() || it.text.matches(pattern)) {
                     onEvent(FourSixEvent.GramsChanged(it))
