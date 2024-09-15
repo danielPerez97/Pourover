@@ -24,7 +24,7 @@ class FourSixPresenter @AssistedInject constructor(
 {
     @Composable
     override fun models(events: Flow<FourSixEvent>): FourSixState {
-        var grams by remember { mutableStateOf(TextFieldValue()) }
+        var grams by remember { mutableStateOf(TextFieldValue("15")) }
         var sweetness by remember { mutableStateOf(Sweetness.Standard) }
         var strength by remember { mutableStateOf(Strength.Lighter) }
         var firstHalfPours by remember { mutableStateOf(emptyList<Int>()) }
@@ -46,6 +46,7 @@ class FourSixPresenter @AssistedInject constructor(
         }
 
         LaunchedEffect(Unit) {
+            calculate(newGrams = grams.text)
             events.collect { event ->
                 when(event) {
                     is FourSixEvent.GramsChanged -> {
