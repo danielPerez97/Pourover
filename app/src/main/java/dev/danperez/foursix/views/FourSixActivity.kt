@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -70,24 +71,11 @@ fun Screen(
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize(),
         ) {
-            if(model.grams.text.isNotEmpty()) {
-                Row(
-                    verticalAlignment = Alignment.Top,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    PoursData(
-                        firstHalfPours = model.firstHalfPours,
-                        secondHalfPours = model.secondHalfPours,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            } else {
-                Text(
-                    text = "Please enter your beans in grams.",
-                    modifier = Modifier,
-                )
-            }
+            PoursData(
+                firstHalfPours = model.firstHalfPours,
+                secondHalfPours = model.secondHalfPours,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             ControllerView(
                 model = model,
@@ -105,19 +93,28 @@ fun PoursData(
     modifier: Modifier = Modifier,
 )
 {
-    Row(
-        verticalAlignment = Alignment.Top,
-        modifier = modifier
-    ) {
-        PoursList(
-            firstHalfPours,
-            secondHalfPours,
-            Modifier.fillMaxWidth(0.5f),
-        )
-        PourChronology(
-            allPours = firstHalfPours + secondHalfPours,
-            modifier = Modifier.fillMaxWidth()
-        )
+    Box(modifier = modifier) {
+        if(firstHalfPours.isNotEmpty() && secondHalfPours.isNotEmpty()) {
+            Row(
+                verticalAlignment = Alignment.Top,
+                modifier = modifier
+            ) {
+                PoursList(
+                    firstHalfPours,
+                    secondHalfPours,
+                    Modifier.fillMaxWidth(0.5f),
+                )
+                PourChronology(
+                    allPours = firstHalfPours + secondHalfPours,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        } else {
+            Text(
+                text = "Please enter your beans in grams.",
+                modifier = Modifier.align(Alignment.Center),
+            )
+        }
     }
 }
 
