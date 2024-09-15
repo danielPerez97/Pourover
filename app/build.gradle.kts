@@ -16,6 +16,7 @@ scaler {
                 activity()
                 includeTestArtifact()
             }
+            molecule()
             retained(RetainedType.Activity, RetainedType.Fragment)
         }
     }
