@@ -71,11 +71,17 @@ fun Screen(
             modifier = Modifier.fillMaxSize(),
         ) {
             if(model.grams.text.isNotEmpty()) {
-                PoursList(
-                    model.firstHalfPours,
-                    model.secondHalfPours,
-                    Modifier.align(Alignment.Center),
-                )
+                Row(
+                    verticalAlignment = Alignment.Top,
+                    modifier = Modifier.align(Alignment.Center)
+                        .fillMaxWidth()
+                ) {
+                    PoursData(
+                        firstHalfPours = model.firstHalfPours,
+                        secondHalfPours = model.secondHalfPours,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             } else {
                 Text(
                     text = "Please enter your beans in grams.",
@@ -89,6 +95,29 @@ fun Screen(
                 modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
+    }
+}
+
+@Composable
+fun PoursData(
+    firstHalfPours: List<Int>,
+    secondHalfPours: List<Int>,
+    modifier: Modifier = Modifier,
+)
+{
+    Row(
+        verticalAlignment = Alignment.Top,
+        modifier = modifier
+    ) {
+        PoursList(
+            firstHalfPours,
+            secondHalfPours,
+            Modifier.fillMaxWidth(0.5f),
+        )
+        PourChronology(
+            allPours = firstHalfPours + secondHalfPours,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
