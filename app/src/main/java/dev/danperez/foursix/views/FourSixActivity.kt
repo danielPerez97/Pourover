@@ -154,7 +154,7 @@ fun ControllerView(
         }
         TextField(
             value = model.grams,
-            label = { Text("Beans(Grams)") },
+            label = { Text("Beans(g)") },
             onValueChange = {
                 if(it.text.isEmpty() || it.text.matches(pattern)) {
                     onEvent(FourSixEvent.GramsChanged(it))
@@ -182,7 +182,7 @@ fun PoursList(
                 Text("First 40%(Sweetness)")
             }
             items(firstHalfPours) {
-                Text("$it grams")
+                Text("$it(g)")
             }
         }
 
@@ -197,7 +197,7 @@ fun PoursList(
                 Text("Second 60%(Strength)")
             }
             items(secondHalfPours) {
-                Text("$it grams")
+                Text("$it(g)")
             }
         }
     }

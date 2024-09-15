@@ -34,7 +34,7 @@ fun PourChronology(
 
             // Display the pour label and cumulative total
             Text(
-                text = if (index == 0) "Starting Point: $total" else "Pour ${index}: $total",
+                text = if (index == 0) "Starting Water: $total(g)" else "Pour ${index}: $total(g)",
                 modifier = Modifier.padding(bottom = 8.dp)
             )
         }
