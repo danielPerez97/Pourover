@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AndroidUiDispatcher
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.danperez.foursix.FourSixApplication
@@ -100,7 +101,7 @@ fun ControllerView(
             Column(
                 Modifier.fillMaxWidth(0.5f)
             ) {
-                Text("Sweetness:")
+                Text("Choose Sweetness:", fontWeight = FontWeight.Bold)
                 SweetnessRadioButtonGroup(
                     selectedSweetness = model.sweetness,
                     onEvent = onEvent,
@@ -110,7 +111,7 @@ fun ControllerView(
             Column(
                 Modifier.fillMaxWidth()
             ) {
-                Text("Strength:")
+                Text("Choose Strength:", fontWeight = FontWeight.Bold)
                 StrengthRadioGroup(
                     selectedStrength = model.strength,
                     onEvent = onEvent,
