@@ -8,7 +8,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 // Set the target JVM bytecode version to 1.8 for Java 8 compatibility
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -40,7 +40,7 @@ kotlin {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_17
 }
 
