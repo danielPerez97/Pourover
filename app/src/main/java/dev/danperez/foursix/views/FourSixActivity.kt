@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.compose.ui.platform.AndroidUiDispatcher
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.danperez.foursix.FourSixApplication
+import dev.danperez.foursix.views.theme.FourSixTheme
 import dev.marcellogalhardo.retained.activity.retain
 import javax.inject.Inject
 
@@ -44,11 +46,13 @@ class FourSixActivity: AppCompatActivity()
         setContent {
             val state by presenter.models.collectAsState()
 
-            Screen(
-                model = state,
-                onEvent = { presenter.take(it) },
-                modifier = Modifier.fillMaxSize(),
-            )
+            FourSixTheme {
+                Screen(
+                    model = state,
+                    onEvent = { presenter.take(it) },
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
         }
     }
 }
@@ -60,21 +64,23 @@ fun Screen(
     modifier: Modifier = Modifier,
 )
 {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier,
-    ) {
-        PoursList(
-            model.firstHalfPours,
-            model.secondHalfPours,
-            Modifier.align(Alignment.Center),
-        )
+    Surface(modifier) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            PoursList(
+                model.firstHalfPours,
+                model.secondHalfPours,
+                Modifier.align(Alignment.Center),
+            )
 
-        ControllerView(
-            model = model,
-            onEvent = onEvent,
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+            ControllerView(
+                model = model,
+                onEvent = onEvent,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+        }
     }
 }
 
