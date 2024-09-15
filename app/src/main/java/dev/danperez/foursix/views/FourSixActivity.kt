@@ -70,11 +70,18 @@ fun Screen(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(),
         ) {
-            PoursList(
-                model.firstHalfPours,
-                model.secondHalfPours,
-                Modifier.align(Alignment.Center),
-            )
+            if(model.grams.text.isNotEmpty()) {
+                PoursList(
+                    model.firstHalfPours,
+                    model.secondHalfPours,
+                    Modifier.align(Alignment.Center),
+                )
+            } else {
+                Text(
+                    text = "Please enter your beans in grams.",
+                    Modifier.align(Alignment.Center),
+                )
+            }
 
             ControllerView(
                 model = model,
