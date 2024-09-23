@@ -39,9 +39,7 @@ rootProject.name = "foursix"
 include(":app")
 include(":foursixcore")
 
-includeBuild("C:\\Users\\Daniel\\IdeaProjects\\scaler-gradle-plugin") {
-    dependencySubstitution {
-        substitute(module("dev.danperez.sgp:sgp"))
-            .using(project(":ScalerAndroidPlugin"))
-    }
+val localSettings = file("local.settings.gradle.kts")
+if (localSettings.exists()) {
+    apply(from = localSettings)
 }
