@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven {
             name = "scaler-gradle-plugin"
             url = uri("https://maven.pkg.github.com/danielPerez97/Scaler")
@@ -38,6 +39,7 @@ dependencyResolutionManagement {
 rootProject.name = "foursix"
 include(":app")
 include(":foursixcore")
+include(":Presenter")
 
 val localSettings = file("local.settings.gradle.kts")
 if (localSettings.exists()) {

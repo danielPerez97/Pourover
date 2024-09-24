@@ -1,4 +1,4 @@
-package dev.danperez.foursix.views
+package dev.danperez.foursix.presenter
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -7,21 +7,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
-import dev.danperez.foursix.molecule.MoleculePresenter
 import dev.danperez.foursixcore.FourSixProducer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlin.coroutines.CoroutineContext
 
-class FourSixPresenter @AssistedInject constructor(
+class FourSixPresenter constructor(
     private val fourSixProducer: FourSixProducer,
-    @Assisted scope: CoroutineScope,
-    @Assisted dispatcher: CoroutineContext,
+    scope: CoroutineScope,
+    dispatcher: CoroutineContext,
 ): MoleculePresenter<FourSixEvent, FourSixState>(scope.coroutineContext, dispatcher)
 {
+
     @Composable
     override fun models(events: Flow<FourSixEvent>): FourSixState {
         var grams by remember { mutableStateOf(TextFieldValue("15")) }
@@ -88,7 +85,6 @@ class FourSixPresenter @AssistedInject constructor(
         Strength.EvenStronger -> FourSixProducer.Strength.EvenStronger
     }
 
-    @AssistedFactory
     interface Factory
     {
         fun create(

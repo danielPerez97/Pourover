@@ -17,7 +17,6 @@ scaler {
                 activity()
                 includeTestArtifact()
             }
-            molecule()
             retained(RetainedType.Activity, RetainedType.Fragment)
         }
     }
@@ -39,6 +38,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":foursixcore"))
+    implementation(project(":Presenter"))
 
     // Dagger
     implementation(libs.dagger.api)

@@ -1,4 +1,4 @@
-package dev.danperez.foursix.views
+package dev.danperez.foursix.presenter
 
 import androidx.compose.ui.text.input.TextFieldValue
 

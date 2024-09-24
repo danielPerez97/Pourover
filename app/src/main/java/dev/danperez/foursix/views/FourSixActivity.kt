@@ -30,6 +30,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.danperez.foursix.FourSixApplication
+import dev.danperez.foursix.presenter.FourSixEvent
+import dev.danperez.foursix.presenter.FourSixPresenter
+import dev.danperez.foursix.presenter.FourSixState
+import dev.danperez.foursix.presenter.Strength
+import dev.danperez.foursix.presenter.Sweetness
 import dev.danperez.foursix.views.theme.FourSixTheme
 import dev.marcellogalhardo.retained.activity.retain
 import javax.inject.Inject
@@ -203,17 +208,6 @@ fun PoursList(
     }
 }
 
-enum class Strength {
-    /** Lighter strength profile: Uses the entire 60% of water in a single pour. */
-    Lighter,
-
-    /** Stronger profile: Splits the 60% of water into two equal pours. */
-    Stronger,
-
-    /** Even stronger profile: Splits the 60% of water into three equal pours. */
-    EvenStronger
-}
-
 @Composable
 fun StrengthRadioGroup(
     selectedStrength: Strength,
@@ -243,17 +237,6 @@ fun StrengthRadioGroup(
             }
         }
     }
-}
-
-enum class Sweetness {
-    /** Standard sweetness profile: Splits the first 40% of water into two equal pours. */
-    Standard,
-
-    /** Sweeter profile: Uses 41.67% of the total water for the first pour. */
-    Sweeter,
-
-    /** Brighter profile: Uses 58.33% of the total water for the first pour. */
-    Brighter;
 }
 
 @Composable
