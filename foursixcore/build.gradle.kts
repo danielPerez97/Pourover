@@ -33,6 +33,17 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
+
+        val macosArm64Main by getting {
+            dependencies {
+                // Add macOS-specific dependencies here if needed
+            }
+        }
+        val macosArm64Test by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
     }
 }
 
