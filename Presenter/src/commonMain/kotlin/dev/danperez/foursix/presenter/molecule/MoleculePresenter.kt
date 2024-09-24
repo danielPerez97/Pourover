@@ -1,4 +1,4 @@
-package dev.danperez.foursix.presenter
+package dev.danperez.foursix.presenter.molecule
 
 import androidx.compose.runtime.Composable
 import app.cash.molecule.RecompositionMode
