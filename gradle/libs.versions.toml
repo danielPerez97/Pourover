@@ -64,7 +64,7 @@ sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 sqldelight-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
-turbine = { module = "app.cash.turbine:turbine", version = "1.0.0" }
+turbine = { module = "app.cash.turbine:turbine", version = "1.1.0" }
 viewmodelktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.1" }
 
 [plugins]
