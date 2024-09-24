@@ -1,17 +1,14 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
 }
 
 kotlin {
     // Define targets for different platforms
-    jvm {
-        compilations.all {
-            kotlinOptions {
-                // Set the target JVM bytecode version to 1.8 for Java 8 compatibility
-                jvmTarget = "11"
-            }
-        }
-    }
+    jvm()
+    macosArm64()
 
     sourceSets {
         val commonMain by getting {
@@ -36,6 +33,12 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
+    }
+}
+
+tasks.withType<KotlinJvmCompile>() {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
