@@ -10,6 +10,7 @@ plugins {
 kotlin {
     // Define targets for different platforms
     jvm()
+    macosArm64()
 
     sourceSets {
         val commonMain by getting {
