@@ -39,6 +39,7 @@ dependencyResolutionManagement {
 rootProject.name = "foursix"
 include(":app")
 include(":foursixcore")
+include(":Frontend")
 include(":Presenter")
 
 val localSettings = file("local.settings.gradle.kts")

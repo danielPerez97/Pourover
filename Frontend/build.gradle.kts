@@ -1,8 +1,12 @@
+import co.touchlab.skie.configuration.FlowInterop
+import co.touchlab.skie.configuration.SuspendInterop
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose.jb)
     alias(libs.plugins.skie)
 }
 
@@ -12,7 +16,7 @@ kotlin {
     macosArm64 {
         binaries {
             framework {
-                baseName = "FourSixProducer"
+                baseName = "FourSixPresenter"
             }
         }
     }
@@ -20,13 +24,18 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(compose.runtime)
+                api(compose.foundation)
+                api(compose.material3)
+                implementation(project(":Presenter"))
                 implementation(kotlin("stdlib-common"))
-                // Add common dependencies here
+                api(libs.kotlinx.coroutines)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(libs.turbine)
             }
         }
         val jvmMain by getting {
@@ -40,17 +49,18 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
+    }
+}
 
-        val macosArm64Main by getting {
-            dependencies {
-                // Add macOS-specific dependencies here if needed
-            }
+skie {
+    features {
+        enableSwiftUIObservingPreview = true
+        coroutinesInterop.set(true)
+        group {
+            SuspendInterop.Enabled(true)
+            FlowInterop.Enabled(true) // or false
         }
-        val macosArm64Test by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
+
     }
 }
 

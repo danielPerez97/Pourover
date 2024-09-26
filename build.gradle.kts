@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.skie) apply false
     id("dev.danperez.scaler.base") version "0.24.0"
     id("dev.danperez.scaler") version "0.24.0" apply false
 }

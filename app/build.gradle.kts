@@ -38,6 +38,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":foursixcore"))
+    implementation(project(":Frontend"))
     implementation(project(":Presenter"))
 
     // Dagger
