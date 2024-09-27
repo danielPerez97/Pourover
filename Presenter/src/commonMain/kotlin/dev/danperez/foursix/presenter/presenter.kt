@@ -18,8 +18,8 @@ fun fourSixPresenter(events: Flow<FourSixEvent>, fourSixProducer: FourSixProduce
     var firstHalfPours by remember { mutableStateOf(emptyList<Int>()) }
     var secondHalfPours by remember { mutableStateOf(emptyList<Int>()) }
 
-    fun calculate(newGrams: String) {
-        if(newGrams.isNotEmpty()) {
+    LaunchedEffect(grams) {
+        if(grams.text.isNotEmpty()) {
             val results = fourSixProducer.calculate(
                 gramsBeans = grams.text.toInt(),
                 sweetness = sweetness.toSweetness(),
@@ -33,23 +33,19 @@ fun fourSixPresenter(events: Flow<FourSixEvent>, fourSixProducer: FourSixProduce
         }
     }
 
-    LaunchedEffect(Unit) {
-        calculate(newGrams = grams.text)
+    LaunchedEffect(events) {
         events.collect { event ->
             when(event) {
                 is FourSixEvent.GramsChanged -> {
                     grams = event.newGrams
-                    calculate(newGrams = grams.text)
                 }
 
                 is FourSixEvent.SweetnessChanged -> {
                     sweetness = event.sweetness
-                    calculate(newGrams = grams.text)
                 }
 
                 is FourSixEvent.StrengthChanged -> {
                     strength = event.strength
-                    calculate(newGrams = grams.text)
                 }
             }
         }
