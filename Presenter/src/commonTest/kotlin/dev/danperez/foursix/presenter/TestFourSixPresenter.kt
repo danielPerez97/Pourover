@@ -56,6 +56,7 @@ class TestFourSixPresenter {
             .test {
                 skipItems(2) // Initial State, Calculated State for initial state
                 events.send(FourSixEvent.GramsChanged(TextFieldValue("20")))
+                skipItems(1) // Update grams state, no calculation yet
                 assertEquals(
                     FourSixState(
                         grams = TextFieldValue("20"),
