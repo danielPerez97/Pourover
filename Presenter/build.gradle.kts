@@ -13,12 +13,15 @@ plugins {
 kotlin {
     // Define targets for different platforms
     jvm()
-    iosArm64()
-    iosSimulatorArm64()
-    macosArm64 {
-        binaries {
+    listOf(
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries {
             framework {
                 baseName = "FourSixPresenterLib"
+                export(project(":foursixcore"))
+                isStatic = true
             }
         }
     }
@@ -45,9 +48,6 @@ kotlin {
             dependsOn(commonMain)
         }
         val iosSimulatorArm64Main by getting {
-            dependsOn(commonMain)
-        }
-        val macosArm64Main by getting {
             dependsOn(commonMain)
         }
         val jvmMain by getting {
