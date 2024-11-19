@@ -13,6 +13,8 @@ plugins {
 kotlin {
     // Define targets for different platforms
     jvm()
+    iosArm64()
+    iosSimulatorArm64()
     macosArm64 {
         binaries {
             framework {
@@ -24,10 +26,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(compose.ui)
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                implementation(project(":Presenter"))
+                api(compose.material)
+                api(compose.components.resources)
+                api(project(":Presenter"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
             }
@@ -37,6 +42,15 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(libs.turbine)
             }
+        }
+        val iosArm64Main by getting {
+            dependsOn(commonMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(commonMain)
+        }
+        val macosArm64Main by getting {
+            dependsOn(commonMain)
         }
         val jvmMain by getting {
             dependencies {
