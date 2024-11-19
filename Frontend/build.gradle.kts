@@ -18,7 +18,7 @@ kotlin {
     macosArm64 {
         binaries {
             framework {
-                baseName = "FourSixPresenter"
+                baseName = "FourSixFrontend"
             }
         }
     }
