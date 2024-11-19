@@ -14,7 +14,7 @@ kotlin {
     macosArm64 {
         binaries {
             framework {
-                baseName = "FourSixCore"
+                baseName = "FourSixCoreLib"
             }
         }
     }

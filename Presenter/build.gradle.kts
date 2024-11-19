@@ -18,7 +18,7 @@ kotlin {
     macosArm64 {
         binaries {
             framework {
-                baseName = "FourSixPresenter"
+                baseName = "FourSixPresenterLib"
             }
         }
     }
@@ -29,7 +29,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                implementation(project(":foursixcore"))
+                api(project(":foursixcore"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
                 implementation(libs.molecule)
