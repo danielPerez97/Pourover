@@ -8,7 +8,7 @@ import dev.danperez.foursix.presenter.FourSixPresenter
 import dev.danperez.foursix.presenter.FourSixState
 import platform.UIKit.UIViewController
 
-fun FourSixSimulatorViewController(state: FourSixState, presenter: FourSixPresenter): UIViewController = ComposeUIViewController {
+fun createViewController(state: FourSixState, presenter: FourSixPresenter): UIViewController = ComposeUIViewController {
     Box(Modifier.fillMaxSize()) {
         Screen(
             model = state,
