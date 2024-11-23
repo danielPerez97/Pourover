@@ -5,7 +5,7 @@ import dev.danperez.foursixcore.FourSixProducer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
-fun create(): FourSixPresenter {
+actual fun createPresenter(): FourSixPresenter {
     return FourSixPresenter(
         fourSixProducer = FourSixProducer(),
         scope = CoroutineScope(SupervisorJob()),
