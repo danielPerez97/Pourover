@@ -16,3 +16,7 @@
 local.properties
 /keystore.properties
 /local.settings.gradle.kts
+
+# Check if this is necessary later
+**/.xcframework
+**/.framework
