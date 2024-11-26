@@ -1,6 +1,7 @@
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SuspendInterop
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
@@ -12,6 +13,9 @@ plugins {
 
 kotlin {
     // Define targets for different platforms
+    val frameworkName = "FourSixFrontendLib"
+    val xcf = XCFramework(frameworkName)
+
     jvm()
     listOf(
         iosArm64(),
@@ -20,8 +24,11 @@ kotlin {
         iosTarget.binaries {
             framework {
                 baseName = "FourSixFrontendLib"
+                export(project(":foursixcore"))
                 export(project(":Presenter"))
+                export("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
                 isStatic = true
+                xcf.add(this)
             }
         }
     }
@@ -38,6 +45,7 @@ kotlin {
                 api(project(":Presenter"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
+                api(libs.molecule)
             }
         }
         val commonTest by getting {
@@ -48,6 +56,9 @@ kotlin {
         }
         val iosArm64Main by getting {
             dependsOn(commonMain)
+            dependencies {
+                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
+            }
         }
         val iosSimulatorArm64Main by getting {
             dependsOn(commonMain)

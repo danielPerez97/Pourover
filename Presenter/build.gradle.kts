@@ -21,6 +21,7 @@ kotlin {
             framework {
                 baseName = "FourSixPresenterLib"
                 export(project(":foursixcore"))
+                export(libs.molecule)
                 isStatic = true
             }
         }
@@ -35,7 +36,7 @@ kotlin {
                 api(project(":foursixcore"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
-                implementation(libs.molecule)
+                api(libs.molecule)
             }
         }
         val commonTest by getting {
@@ -46,6 +47,9 @@ kotlin {
         }
         val iosArm64Main by getting {
             dependsOn(commonMain)
+            dependencies {
+                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
+            }
         }
         val iosSimulatorArm64Main by getting {
             dependsOn(commonMain)
