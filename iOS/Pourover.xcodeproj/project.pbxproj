@@ -120,6 +120,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 650961372CA27056000A9D5D /* Build configuration list for PBXNativeTarget "Pourover" */;
 			buildPhases = (
+				6547DAE02CF8179400ACF571 /* ShellScript */,
 				6509610E2CA27055000A9D5D /* Sources */,
 				6509610F2CA27055000A9D5D /* Frameworks */,
 				650961102CA27055000A9D5D /* Resources */,
@@ -252,6 +253,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6547DAE02CF8179400ACF571 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"/Users/daniel/StudioProjects/Pourover\"\n./gradlew :Frontend:embedAndSignAppleFrameworkForXcode\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6509610E2CA27055000A9D5D /* Sources */ = {
@@ -421,6 +442,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Pourover/Preview Content\"";
 				DEVELOPMENT_TEAM = LJTSBHS7GL;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pourover",
@@ -458,6 +480,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Pourover/Preview Content\"";
 				DEVELOPMENT_TEAM = LJTSBHS7GL;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pourover",
