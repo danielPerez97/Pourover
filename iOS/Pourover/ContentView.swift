@@ -6,48 +6,39 @@
 //
 
 import SwiftUI
-//import FourSixCoreLib
-//import FourSixPresenterLib
 import FourSixFrontendLib
 
-// PICKUP: DisplayLinkClock, from Molecule, is being weird. 
-
-let presenter = createPresenter()
-
-struct ComposeViewController: UIViewControllerRepresentable {
-    @State
-    var state: FourSixState = presenter.models.value!
+@MainActor
+class SwiftFourSixPresenter: ObservableObject
+{
+    @MainActor
+    var presenter = createPresenter()
     
-    func makeUIViewController(context: Context) -> UIViewController {
-        return createViewController(state: state, presenter: presenter)
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    @Published
+    private(set) var state: FourSixState? = nil
+    
+    @MainActor
+    func activate() async {
+        for await state in presenter.presenter {
+            self.state = state
+        }
     }
 }
 
 struct ContentView: View {
-    @State
-    var state: FourSixState = presenter.models.value!
+    
+    @MainActor
+    @ObservedObject
+    var presenter = SwiftFourSixPresenter()
     
     var body: some View {
         VStack {
-            Text("Grams: #\(state.grams)")
+            Text("Grams: #\(presenter.state?.grams)")
             Button("Test") {  }
         }
         .padding()
         .task {
-            await observeModels()
-        }
-    }
-    
-    func observeModels() async {
-        // Observe the presenter.models asynchronously
-        for await model in presenter.models {
-            // Update the state on the main thread
-            await MainActor.run {
-                state = model!
-            }
+            await presenter.activate()
         }
     }
 }

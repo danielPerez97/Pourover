@@ -1,27 +1,28 @@
 package dev.danperez.foursix.presenter
 
-import androidx.compose.runtime.Composable
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dev.danperez.foursix.presenter.molecule.MoleculePresenter
 import dev.danperez.foursixcore.FourSixProducer
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.coroutines.CoroutineContext
 
-class FourSixPresenter constructor(
+class FourSixPresenter(
     private val fourSixProducer: FourSixProducer,
-    scope: CoroutineScope,
-    dispatcher: CoroutineContext,
-): MoleculePresenter<FourSixEvent, FourSixState>(scope.coroutineContext, dispatcher)
+): MoleculePresenter()
 {
+    private val events = MutableSharedFlow<FourSixEvent>(extraBufferCapacity = 20)
 
-    @Composable
-    override fun models(events: Flow<FourSixEvent>): FourSixState {
-        return fourSixPresenter(
-            events = events,
-            fourSixProducer = fourSixProducer,
-        )
+    val presenter = moleculeScope.launchMolecule(mode = RecompositionMode.ContextClock) {
+        fourSixPresenter(events, fourSixProducer)
     }
 
+    fun take(event: FourSixEvent) {
+        if (!events.tryEmit(event)) {
+            error("Event buffer overflow.")
+        }
+    }
     interface Factory
     {
         fun create(

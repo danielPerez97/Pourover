@@ -19,8 +19,6 @@ class FourSixPresenterFactory @Inject constructor(
     ): FourSixPresenter {
         return FourSixPresenter(
             fourSixProducer = producer.get(),
-            scope = coroutineContext,
-            dispatcher = dispatcher
         )
     }
 
