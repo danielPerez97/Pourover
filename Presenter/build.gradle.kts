@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
-    alias(libs.plugins.skie)
+    id("dev.danperez.convention.skie") apply false
 }
 
 kotlin {
@@ -62,18 +62,6 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
-    }
-}
-
-skie {
-    features {
-        enableSwiftUIObservingPreview = true
-        coroutinesInterop.set(true)
-        group {
-            SuspendInterop.Enabled(true)
-            FlowInterop.Enabled(true) // or false
-        }
-
     }
 }
 

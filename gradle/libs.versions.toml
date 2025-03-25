@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.3"
+agp = "8.9.0"
 anvil = "2.5.0-beta09"
 appcompat = "1.7.0"
 autoservice = "1.0"
@@ -11,7 +11,7 @@ dagger = "2.47"
 espressoCore = "3.6.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-kotlin = "2.1.0"
+kotlin = "2.1.20"
 ksp = "1.9.0-1.0.12"
 material = "1.12.0"
 molecule = "2.0.0"
@@ -19,7 +19,7 @@ navigation = "2.7.0"
 okhttp = "4.12.0"
 retained = "1.0.2"
 retrofit = "2.9.0"
-skie = "0.10.0"
+skie = "0.10.1"
 sqldelight = "2.0.0"
 
 scaler-compilersdkVersion = "35"
@@ -27,6 +27,7 @@ scaler-minsdkVersion = "28"
 scaler-targetsdkVersion = "35"
 
 [libraries]
+agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,6 +44,7 @@ dagger-api = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 fragment = { module = "androidx.fragment:fragment", version = "1.6.1" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.7.1" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
@@ -61,6 +63,7 @@ retained-view = { module = "dev.marcellogalhardo:retained-view", version.ref = "
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit"}
 retrofit-ktx-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+skie = { module = "co.touchlab.skie:co.touchlab.skie.gradle.plugin", version.ref = "skie" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 sqldelight-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }

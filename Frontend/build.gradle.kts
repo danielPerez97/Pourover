@@ -1,5 +1,6 @@
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SuspendInterop
+import co.touchlab.skie.plugin.configuration.SkieExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
@@ -8,7 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
-    alias(libs.plugins.skie)
+    id("dev.danperez.convention.skie") apply false
 }
 
 kotlin {
@@ -74,18 +75,6 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
-    }
-}
-
-skie {
-    features {
-        enableSwiftUIObservingPreview = true
-        coroutinesInterop.set(true)
-        group {
-            SuspendInterop.Enabled(true)
-            FlowInterop.Enabled(true) // or false
-        }
-
     }
 }
 

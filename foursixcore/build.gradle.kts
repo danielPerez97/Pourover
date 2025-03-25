@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.skie)
+    id("dev.danperez.convention.skie") apply false
 }
 
 kotlin {
