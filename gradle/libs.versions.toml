@@ -5,7 +5,7 @@ appcompat = "1.7.0"
 autoservice = "1.0"
 composeCompiler = "1.5.5"
 compose-jb = "1.7.1"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 coroutines = "1.9.0"
 dagger = "2.47"
 espressoCore = "3.6.1"
@@ -22,9 +22,9 @@ retrofit = "2.9.0"
 skie = "0.10.0"
 sqldelight = "2.0.0"
 
-scaler-compilersdkVersion = "34"
+scaler-compilersdkVersion = "35"
 scaler-minsdkVersion = "28"
-scaler-targetsdkVersion = "34"
+scaler-targetsdkVersion = "35"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }

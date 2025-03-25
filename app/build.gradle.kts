@@ -22,7 +22,7 @@ scaler {
     }
     features {
         dagger(useDaggerCompiler = true) {
-
+            disableAnvil()
         }
         okHttp()
     }
