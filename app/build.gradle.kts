@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    kotlin("kapt")
     id("dev.danperez.scaler")
 }
 
@@ -43,5 +44,6 @@ dependencies {
 
     // Dagger
     implementation(libs.dagger.api)
+    kapt(libs.dagger.compiler)
 
 }

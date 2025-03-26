@@ -10,7 +10,8 @@ import kotlin.coroutines.CoroutineContext
 
 class FourSixPresenter(
     private val fourSixProducer: FourSixProducer,
-): MoleculePresenter()
+    scope: CoroutineScope
+): MoleculePresenter(scope)
 {
     private val events = MutableSharedFlow<FourSixEvent>(extraBufferCapacity = 20)
 

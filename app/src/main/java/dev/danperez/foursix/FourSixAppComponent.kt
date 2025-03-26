@@ -1,13 +1,13 @@
 package dev.danperez.foursix
 
 import android.content.Context
-import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
-import dev.danperez.foursix.di.AppScope
+import dev.danperez.foursix.di.FourSixModule
+import dev.danperez.foursix.di.FourSixPresenterFactoryBinder
 import dev.danperez.foursix.views.FourSixActivity
 
-@MergeComponent(AppScope::class)
+@Component(modules = [FourSixModule::class, FourSixPresenterFactoryBinder::class])
 interface FourSixAppComponent
 {
     fun inject(activity: FourSixActivity)

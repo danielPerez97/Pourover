@@ -27,7 +27,7 @@ class FourSixActivity: AppCompatActivity()
         super.onCreate(savedInstanceState)
 
         setContent {
-            val state by presenter.models.collectAsState()
+            val state by presenter.presenter.collectAsState()
 
             FourSixTheme {
                 Screen(
