@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -49,23 +51,26 @@ fun Screen(
             )
         }
     ) { paddingValues ->
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-        ) {
-            PoursData(
-                firstHalfPours = model.firstHalfPours,
-                secondHalfPours = model.secondHalfPours,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            ControllerView(
-                model = model,
-                onEvent = onEvent,
+        Column(modifier = Modifier.padding(paddingValues)) {
+            Text("For ${model.grams.text} grams of coffee...")
+            HorizontalDivider(Modifier.padding(vertical = 4.dp))
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
-            )
+                    .fillMaxSize(),
+            ) {
+                PoursData(
+                    firstHalfPours = model.firstHalfPours,
+                    secondHalfPours = model.secondHalfPours,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                ControllerView(
+                    model = model,
+                    onEvent = onEvent,
+                    modifier = Modifier
+                )
+            }
         }
     }
 }
