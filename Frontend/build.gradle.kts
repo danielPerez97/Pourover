@@ -27,7 +27,7 @@ kotlin {
                 baseName = "FourSixFrontendLib"
                 export(project(":foursixcore"))
                 export(project(":Presenter"))
-                export("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
+//                export("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
                 isStatic = true
                 xcf.add(this)
             }
@@ -41,7 +41,6 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                api(compose.material)
                 api(compose.components.resources)
                 api(project(":Presenter"))
                 implementation(kotlin("stdlib-common"))
@@ -58,7 +57,7 @@ kotlin {
         val iosArm64Main by getting {
             dependsOn(commonMain)
             dependencies {
-                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
+//                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
             }
         }
         val iosSimulatorArm64Main by getting {
