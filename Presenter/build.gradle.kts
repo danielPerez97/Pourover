@@ -45,12 +45,11 @@ kotlin {
                 implementation(libs.turbine)
             }
         }
-        val iosArm64Main by getting {
+        val darwinMain by creating {
             dependsOn(commonMain)
         }
-        val iosSimulatorArm64Main by getting {
-            dependsOn(commonMain)
-        }
+        iosArm64Main.get().dependsOn(darwinMain)
+        iosSimulatorArm64Main.get().dependsOn(darwinMain)
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))

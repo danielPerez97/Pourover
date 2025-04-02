@@ -54,14 +54,17 @@ kotlin {
                 implementation(libs.turbine)
             }
         }
-        val iosArm64Main by getting {
+        val darwinMain by creating {
             dependsOn(commonMain)
+        }
+        val iosArm64Main by getting {
+            dependsOn(darwinMain)
             dependencies {
 //                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
             }
         }
         val iosSimulatorArm64Main by getting {
-            dependsOn(commonMain)
+            dependsOn(darwinMain)
         }
         val jvmMain by getting {
             dependencies {
