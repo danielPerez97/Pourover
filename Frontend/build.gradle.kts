@@ -1,6 +1,7 @@
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.SuspendInterop
 import co.touchlab.skie.plugin.configuration.SkieExtension
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
@@ -93,6 +94,10 @@ java {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    testLogging {
+        events(TestLogEvent.PASSED, TestLogEvent.FAILED)
+    }
+
 }
 
 tasks.named("assemble") {
