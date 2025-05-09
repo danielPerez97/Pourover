@@ -1,12 +1,13 @@
 package dev.danperez.foursix.di
 
-import dagger.Binds
-import dagger.Module
 import dev.danperez.foursix.presenter.FourSixPresenter
 import dev.danperez.foursixcore.FourSixProducer
+import dev.zacsweers.metro.Binds
+import dev.zacsweers.metro.DependencyGraph
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.Provider
+import dev.zacsweers.metro.Provides
 import kotlinx.coroutines.CoroutineScope
-import javax.inject.Inject
-import javax.inject.Provider
 import kotlin.coroutines.CoroutineContext
 
 class FourSixPresenterFactory @Inject constructor(
@@ -18,14 +19,14 @@ class FourSixPresenterFactory @Inject constructor(
         dispatcher: CoroutineContext
     ): FourSixPresenter {
         return FourSixPresenter(
-            fourSixProducer = producer.get(),
+            fourSixProducer = producer.invoke(),
             scope = CoroutineScope(dispatcher)
         )
     }
 
 }
 
-@Module
+@DependencyGraph(AppScope::class)
 interface FourSixPresenterFactoryBinder
 {
     @Binds

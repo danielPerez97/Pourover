@@ -49,6 +49,26 @@ class FourSixProducer {
      * Calculates the water distribution for the "sweetness" half of the brewing process.
      * This method assumes the input represents 40% of the total water amount.
      *
+     * 20g Coffee
+     * 15:1 grams of water per gram of coffee
+     * 300g total
+     * 0.4 * 300 = 120g(First Half, Sweetness)
+     * 300 - 180 = 180g(Second Half, Strength
+     *
+     * Standard: 120 / 2 = 60g, 2 pours
+     * Sweeter:
+     *     We know 50g and 70g will make a sweeter pour.
+     *     120 * 0.4167 = 50g
+     *     120 - 50g = 70g
+     *     Pour 50g, then 70g
+     *
+     * Brighter:
+     *     We know 70g and 50g will make a brighter pour.
+     *     120 * 0.5833 = 70g
+     *     120 - 70g = 50g
+     *     Pour 70g, then 50g
+     *
+     *
      * @param gramsWater The amount of water in grams to be distributed for sweetness.
      * @param sweetness The desired sweetness profile (Standard, Sweeter, Brighter).
      * @return A list containing the distribution of water pours for the sweetness phase.

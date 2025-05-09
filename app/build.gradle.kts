@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    kotlin("kapt")
     id("dev.danperez.scaler")
+    id("dev.zacsweers.metro") version "0.3.0"
 }
 
 scaler {
@@ -22,9 +22,9 @@ scaler {
         }
     }
     features {
-        dagger(useDaggerCompiler = true) {
-            disableAnvil()
-        }
+//        dagger(useDaggerCompiler = true) {
+//            disableAnvil()
+//        }
         okHttp()
     }
 }
@@ -43,7 +43,5 @@ dependencies {
     implementation(project(":Presenter"))
 
     // Dagger
-    implementation(libs.dagger.api)
-    kapt(libs.dagger.compiler)
 
 }

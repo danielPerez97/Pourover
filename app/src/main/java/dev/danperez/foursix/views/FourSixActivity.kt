@@ -13,7 +13,7 @@ import dev.danperez.foursix.frontend.Screen
 import dev.danperez.foursix.presenter.FourSixPresenter
 import dev.danperez.foursix.views.theme.FourSixTheme
 import dev.marcellogalhardo.retained.activity.retain
-import javax.inject.Inject
+import dev.zacsweers.metro.Inject
 
 class FourSixActivity: AppCompatActivity()
 {

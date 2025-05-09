@@ -1,11 +1,11 @@
 package dev.danperez.foursix.di
 
-import dagger.Module
-import dagger.Provides
 import dev.danperez.foursixcore.FourSixProducer
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.Provides
 
-@Module
-class FourSixModule
+@ContributesTo(AppScope::class)
+interface FourSixModule
 {
     @Provides
     fun provideFourSixProducer(): FourSixProducer
