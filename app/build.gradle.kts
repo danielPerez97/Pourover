@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     id("dev.danperez.scaler") version "0.24.0"
     id("dev.zacsweers.metro") version "0.3.0"
-    id("dev.danperez.scaler") version "0.24.0"
 }
 
 scaler {
