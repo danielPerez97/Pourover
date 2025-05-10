@@ -42,9 +42,22 @@
 		6509612D2CA27056000A9D5D /* PouroverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PouroverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		65C55B252DCECF1F00FDF132 /* Exceptions for "Pourover" folder in "Pourover" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 650961112CA27055000A9D5D /* Pourover */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		650961142CA27055000A9D5D /* Pourover */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				65C55B252DCECF1F00FDF132 /* Exceptions for "Pourover" folder in "Pourover" target */,
+			);
 			path = Pourover;
 			sourceTree = "<group>";
 		};
@@ -120,7 +133,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 650961372CA27056000A9D5D /* Build configuration list for PBXNativeTarget "Pourover" */;
 			buildPhases = (
-				6547DAE02CF8179400ACF571 /* ShellScript */,
+				6547DAE02CF8179400ACF571 /* Run Script */,
 				6509610E2CA27055000A9D5D /* Sources */,
 				6509610F2CA27055000A9D5D /* Frameworks */,
 				650961102CA27055000A9D5D /* Resources */,
@@ -255,7 +268,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6547DAE02CF8179400ACF571 /* ShellScript */ = {
+		6547DAE02CF8179400ACF571 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -264,13 +277,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"/Users/daniel/StudioProjects/Pourover\"\n./gradlew :Frontend:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$HOME/StudioProjects/Pourover\"\n./gradlew :Presenter:embedAndSignAppleFrameworkForXcode\n./gradlew :Frontend:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -452,7 +466,9 @@
 					"$(PROJECT_DIR)/Pourover/releaseFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pourover/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = fdsafdas;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -490,7 +506,9 @@
 					"$(PROJECT_DIR)/Pourover/releaseFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pourover/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = fdsafdas;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

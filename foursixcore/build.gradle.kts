@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    id("dev.danperez.convention.skie") apply false
+    id("dev.danperez.convention.skie") apply true
 }
 
 kotlin {

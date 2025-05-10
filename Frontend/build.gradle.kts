@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
-    id("dev.danperez.convention.skie") apply false
+    id("dev.danperez.convention.skie") apply true
 }
 
 kotlin {

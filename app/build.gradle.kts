@@ -14,7 +14,7 @@ scaler {
         app(applicationId = "dev.danperez.foursix", namespace = "dev.danperez.foursix")
         features {
             navigation()
-            compose("2024.09.00") {
+            compose("2025.05.00") {
                 activity()
                 includeTestArtifact()
             }
