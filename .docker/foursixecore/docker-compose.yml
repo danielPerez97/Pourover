@@ -1,0 +1,19 @@
+services:
+  tests:
+    image: foursixcore-base
+    container_name: foursixcore-test
+    working_dir: /workspace
+    volumes:
+      - ../../:/workspace 
+      - ~/.gradle:/root/.gradle
+    environment:
+      DISABLE_APP: "true"
+      DISABLE_FRONTEND: "true"
+      DISABLE_PRESENTER: "true"
+      DISABLE_SCALER: "true"
+    command:
+      - ./gradlew
+      - :foursixcore:jvmTest
+      - --console=rich
+      - --daemon
+      - --rerun-tasks

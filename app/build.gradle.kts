@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    id("dev.danperez.scaler")
+    id("dev.danperez.scaler") version "0.24.0"
     id("dev.zacsweers.metro") version "0.3.0"
+    id("dev.danperez.scaler") version "0.24.0"
 }
 
 scaler {
