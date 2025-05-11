@@ -17,6 +17,8 @@ package dev.danperez.foursixcore
 
 import kotlin.math.roundToInt
 
+const val STANDARD_FIRST_POUR_RATIO = 0.5f
+
 class FourSixProducer {
 
     /**
@@ -100,6 +102,29 @@ class FourSixProducer {
         }
     }
 
+    /** 
+     * Calculates the water distribution for the balance of acidity and sweetness half of the brewing process.
+     * This method assumes the input represents 40% of the total water amount.
+     *
+     *
+     * @param gramsWater The amount of water in grams to be distributed for sweetness.
+     * @param firstPourRatio The desired water ratio for the first pour. 
+    *  This will determine the sweetness/brightness of the first half of the brewing process.
+     * @return A list containing the distribution of water pours for the first portion.
+     *         The list will always contain two elements tht add up to the first half of the brewing process.
+    */
+    internal fun calculateAciditySweetnessPours(
+        gramsWater: Int, 
+        firstPourRatio: Float = STANDARD_FIRST_POUR_RATIO
+    ): List<Int> {
+        require(firstPourRatio in 0f..1f) { "The first ratio must be between 0 and 1." }
+        
+        val firstPour = (gramsWater * firstPourRatio).roundToInt()
+        val secondPour = gramsWater - firstPour
+
+        return listOf(firstPour, secondPour)
+    }
+
     /**
      * Calculates the water distribution for the "strength" half of the brewing process.
      * This method assumes the input represents 60% of the total water amount.
@@ -129,13 +154,13 @@ class FourSixProducer {
     }
 
     /**
-     * Represents the sweetness profile for the coffee brewing process using the 4:6 method.
-     * Each option adjusts the distribution of water in the initial phase (40% of total water).
-     *
-     * - Standard: Splits the first 40% of water into two equal pours.
-     * - Sweeter: Uses 41.67% of the total water for the first pour, and the remaining water for the second pour.
-     * - Brighter: Uses 58.33% of the total water for the first pour, and the remaining water for the second pour.
-     */
+        * Represents the sweetness profile for the coffee brewing process using the 4:6 method.
+        * Each option adjusts the distribution of water in the initial phase (40% of total water).
+        *
+        * - Standard: Splits the first 40% of water into two equal pours.
+        * - Sweeter: Uses 41.67% of the total water for the first pour, and the remaining water for the second pour.
+        * - Brighter: Uses 58.33% of the total water for the first pour, and the remaining water for the second pour.
+        */
     enum class Sweetness {
         /** Standard sweetness profile: Splits the first 40% of water into two equal pours. */
         Standard,
@@ -148,13 +173,13 @@ class FourSixProducer {
     }
 
     /**
-     * Represents the strength profile for the coffee brewing process using the 4:6 method.
-     * Each option adjusts how the remaining 60% of the water is distributed.
-     *
-     * - Lighter: Uses the entire 60% in a single pour.
-     * - Stronger: Splits the 60% into two equal pours.
-     * - EvenStronger: Splits the 60% into three equal pours.
-     */
+        * Represents the strength profile for the coffee brewing process using the 4:6 method.
+        * Each option adjusts how the remaining 60% of the water is distributed.
+        *
+        * - Lighter: Uses the entire 60% in a single pour.
+        * - Stronger: Splits the 60% into two equal pours.
+        * - EvenStronger: Splits the 60% into three equal pours.
+        */
     enum class Strength {
         /** Lighter strength profile: Uses the entire 60% of water in a single pour. */
         Lighter,
