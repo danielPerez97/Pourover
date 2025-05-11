@@ -17,6 +17,8 @@ package dev.danperez.foursixcore
 
 import kotlin.math.roundToInt
 
+const val STANDARD_FIRST_POUR_RATIO = 0.5f
+
 class FourSixProducer {
 
     /**
@@ -98,6 +100,29 @@ class FourSixProducer {
                 return@List gramsWater - (gramsWater * first).roundToInt()
             }
         }
+    }
+
+    /** 
+     * Calculates the water distribution for the balance of acidity and sweetness half of the brewing process.
+     * This method assumes the input represents 40% of the total water amount.
+     *
+     *
+     * @param gramsWater The amount of water in grams to be distributed for sweetness.
+     * @param firstPourRatio The desired water ratio for the first pour. 
+    *  This will determine the sweetness/brightness of the first half of the brewing process.
+     * @return A list containing the distribution of water pours for the first portion.
+     *         The list will always contain two elements tht add up to the first half of the brewing process.
+    */
+    internal fun calculateAciditySweetnessPours(
+        gramsWater: Int, 
+        firstPourRatio: Float = STANDARD_FIRST_POUR_RATIO
+    ): List<Int> {
+        require(firstPourRatio in 0f..1f) { "The first ratio must be between 0 and 1." }
+        
+        val firstPour = (gramsWater * firstPourRatio).roundToInt()
+        val secondPour = gramsWater - firstPour
+
+        return listOf(firstPour, secondPour)
     }
 
     /**

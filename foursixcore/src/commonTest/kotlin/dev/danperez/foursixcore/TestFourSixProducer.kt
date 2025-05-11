@@ -18,6 +18,7 @@ package dev.danperez.foursixcore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.test.assertFailsWith
 
 class TestFourSixProducer
 {
@@ -156,6 +157,65 @@ class TestFourSixProducer
 
         standardStrongPour.second.forEach { grams ->
             assertEquals(60, grams)
+        }
+    }
+
+    @Test
+    fun testStandardFirstHalf()
+    {
+        val pours = producer.calculateAciditySweetnessPours(
+            gramsWater = 90,
+            firstPourRatio = 0.50f,
+        )
+
+        assertEquals(2, pours.size)
+        assertEquals(45, pours[0])
+        assertEquals(45, pours[1])
+    }
+
+    @Test
+    fun testSweeterFirstHalf()
+    {
+        val pours = producer.calculateAciditySweetnessPours(
+            gramsWater = 90,
+            firstPourRatio = 0.33f
+        )
+
+        assertEquals(2, pours.size)
+        assertEquals(30, pours[0])
+        assertEquals(60, pours[1])
+    }
+
+    @Test
+    fun testBrighterFirstHalf()
+    {
+        val pours = producer.calculateAciditySweetnessPours(
+            gramsWater = 90,
+            firstPourRatio = 0.67f
+        )
+
+        assertEquals(2, pours.size)
+        assertEquals(60, pours[0])
+        assertEquals(30, pours[1])
+    }
+
+
+    @Test
+    fun testSweetnessRatioOutOfBounds() {
+        // Under 0
+        assertFailsWith<IllegalArgumentException> {
+            producer.calculateAciditySweetnessPours(
+                gramsWater = 90,
+                firstPourRatio = -0.1f
+            )
+        }
+
+        // Over 1
+        assertFailsWith<IllegalArgumentException> {
+            producer.calculateAciditySweetnessPours(
+                gramsWater = 90,
+                firstPourRatio = 1.1f
+            )
         }
     }
 }
