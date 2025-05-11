@@ -154,13 +154,13 @@ class FourSixProducer {
     }
 
     /**
-        * Represents the sweetness profile for the coffee brewing process using the 4:6 method.
-        * Each option adjusts the distribution of water in the initial phase (40% of total water).
-        *
-        * - Standard: Splits the first 40% of water into two equal pours.
-        * - Sweeter: Uses 41.67% of the total water for the first pour, and the remaining water for the second pour.
-        * - Brighter: Uses 58.33% of the total water for the first pour, and the remaining water for the second pour.
-        */
+    * Represents the sweetness profile for the coffee brewing process using the 4:6 method.
+    * Each option adjusts the distribution of water in the initial phase (40% of total water).
+    *
+    * - Standard: Splits the first 40% of water into two equal pours.
+    * - Sweeter: Uses 41.67% of the total water for the first pour, and the remaining water for the second pour.
+    * - Brighter: Uses 58.33% of the total water for the first pour, and the remaining water for the second pour.
+    */
     enum class Sweetness {
         /** Standard sweetness profile: Splits the first 40% of water into two equal pours. */
         Standard,
@@ -173,13 +173,13 @@ class FourSixProducer {
     }
 
     /**
-        * Represents the strength profile for the coffee brewing process using the 4:6 method.
-        * Each option adjusts how the remaining 60% of the water is distributed.
-        *
-        * - Lighter: Uses the entire 60% in a single pour.
-        * - Stronger: Splits the 60% into two equal pours.
-        * - EvenStronger: Splits the 60% into three equal pours.
-        */
+    * Represents the strength profile for the coffee brewing process using the 4:6 method.
+    * Each option adjusts how the remaining 60% of the water is distributed.
+    *
+    * - Lighter: Uses the entire 60% in a single pour.
+    * - Stronger: Splits the 60% into two equal pours.
+    * - EvenStronger: Splits the 60% into three equal pours.
+    */
     enum class Strength {
         /** Lighter strength profile: Uses the entire 60% of water in a single pour. */
         Lighter,
