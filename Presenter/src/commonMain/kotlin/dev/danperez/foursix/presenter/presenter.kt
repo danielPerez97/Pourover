@@ -18,7 +18,7 @@ fun fourSixPresenter(events: Flow<FourSixEvent>, fourSixProducer: FourSixProduce
     var firstHalfPours by remember { mutableStateOf(emptyList<Int>()) }
     var secondHalfPours by remember { mutableStateOf(emptyList<Int>()) }
 
-    LaunchedEffect(grams) {
+    LaunchedEffect(grams, sweetness, strength) {
         if(grams.text.isNotEmpty()) {
             val results = fourSixProducer.calculate(
                 gramsBeans = grams.text.toInt(),
