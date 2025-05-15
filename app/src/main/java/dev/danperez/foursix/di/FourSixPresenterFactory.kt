@@ -25,10 +25,3 @@ class FourSixPresenterFactory @Inject constructor(
     }
 
 }
-
-@DependencyGraph(AppScope::class)
-interface FourSixPresenterFactoryBinder
-{
-    @Binds
-    fun bind(impl: FourSixPresenterFactory): FourSixPresenter.Factory
-}
