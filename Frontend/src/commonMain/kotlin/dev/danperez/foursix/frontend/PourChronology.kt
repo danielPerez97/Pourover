@@ -1,5 +1,8 @@
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,11 +21,11 @@ fun PourChronology(
         cumulativePours.forEachIndexed { index, total ->
             if (index > 0) {
                 // Show downward arrow for each pour after the first entry
-//                Icon(
-//                    imageVector = Icons.Default.KeyboardArrowDown,
-//                    contentDescription = "Arrow Down",
-//                    modifier = Modifier.padding(bottom = 4.dp)
-//                )
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Arrow Down",
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
             }
 
             // Display the pour label and cumulative total
