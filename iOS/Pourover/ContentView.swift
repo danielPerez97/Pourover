@@ -49,6 +49,7 @@ struct ContentView: View {
 //                Text("Loading...")
 //            }
             ComposeViewControllerToSwiftUI()
+                .ignoresSafeArea(.keyboard)
         }
         .task {
 //            await presenter.activate()

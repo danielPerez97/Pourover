@@ -1,5 +1,6 @@
 package dev.danperez.foursix.frontend
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.collectAsState
@@ -15,12 +16,10 @@ fun createViewController(): UIViewController {
     return ComposeUIViewController {
         val state by presenter.presenter.collectAsState()
 
-        Box(Modifier.fillMaxSize()) {
-            Screen(
-                model = state,
-                onEvent = { presenter.take(it) },
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
+        Screen(
+            model = state,
+            onEvent = { presenter.take(it) },
+            modifier = Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.Yellow),
+        )
     }
 }
