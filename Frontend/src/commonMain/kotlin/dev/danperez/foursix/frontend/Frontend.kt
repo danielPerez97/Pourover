@@ -3,8 +3,6 @@
 package dev.danperez.foursix.frontend
 
 import PourChronology
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,15 +14,11 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
@@ -59,7 +53,6 @@ fun Screen(
             Text("For ${model.grams.text} grams of coffee...")
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             Column(
-                verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxSize(),
             ) {
@@ -67,12 +60,14 @@ fun Screen(
                     firstHalfPours = model.firstHalfPours,
                     secondHalfPours = model.secondHalfPours,
                     modifier = Modifier.fillMaxWidth()
+                        .weight(1f)
                 )
 
                 ControllerView(
                     model = model,
                     onEvent = onEvent,
                     modifier = Modifier
+                        .weight(1f)
                 )
             }
         }
@@ -119,31 +114,35 @@ fun ControllerView(
 ) {
     val pattern = remember { Regex("^\\d+\$") }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Row(Modifier.fillMaxWidth()) {
-            Column(
-                Modifier.fillMaxWidth(0.5f)
-            ) {
-                Text("Choose Sweetness:", fontWeight = FontWeight.Bold)
-                SweetnessRadioButtonGroup(
-                    selectedSweetness = model.sweetness,
-                    onEvent = onEvent,
-                    modifier = Modifier.fillMaxWidth()
-                )
+    Column(modifier.fillMaxWidth()) {
+        Box(
+            contentAlignment = Alignment.TopStart,
+            modifier = Modifier.fillMaxWidth()
+                .weight(1f)
+        ) {
+            Row(Modifier.fillMaxWidth()) {
+                Column(
+                    Modifier.fillMaxWidth(0.5f)
+                ) {
+                    Text("Choose Sweetness:", fontWeight = FontWeight.Bold)
+                    SweetnessRadioButtonGroup(
+                        selectedSweetness = model.sweetness,
+                        onEvent = onEvent,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                Column(
+                    Modifier.fillMaxWidth()
+                ) {
+                    Text("Choose Strength:", fontWeight = FontWeight.Bold)
+                    StrengthRadioGroup(
+                        selectedStrength = model.strength,
+                        onEvent = onEvent,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
-            Column(
-                Modifier.fillMaxWidth()
-            ) {
-                Text("Choose Strength:", fontWeight = FontWeight.Bold)
-                StrengthRadioGroup(
-                    selectedStrength = model.strength,
-                    onEvent = onEvent,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+
         }
         TextField(
             value = model.grams,
