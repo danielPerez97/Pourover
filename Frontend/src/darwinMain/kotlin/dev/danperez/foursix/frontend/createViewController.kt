@@ -19,7 +19,7 @@ fun createViewController(): UIViewController {
         Screen(
             model = state,
             onEvent = { presenter.take(it) },
-            modifier = Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.Yellow),
+            modifier = Modifier.fillMaxSize(),
         )
     }
 }
