@@ -11,6 +11,12 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
     id("dev.danperez.convention.skie") apply true
+    alias(libs.plugins.android.library)
+}
+
+android {
+    namespace = "dev.danperez.foursix.frontend"
+    compileSdk = libs.versions.scaler.compilersdkVersion.get().toInt()
 }
 
 kotlin {
@@ -18,6 +24,7 @@ kotlin {
     val frameworkName = "FourSixFrontendLib"
     val xcf = XCFramework(frameworkName)
 
+    androidTarget()
     jvm()
     listOf(
         iosArm64(),

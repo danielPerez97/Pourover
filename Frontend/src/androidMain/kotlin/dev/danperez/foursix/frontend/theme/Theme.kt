@@ -1,4 +1,4 @@
-package dev.danperez.foursix.views.theme
+package dev.danperez.foursix.frontend.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

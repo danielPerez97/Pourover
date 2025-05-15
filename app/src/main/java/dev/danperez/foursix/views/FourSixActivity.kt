@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.AndroidUiDispatcher
 import dev.danperez.foursix.FourSixApplication
 import dev.danperez.foursix.frontend.Screen
 import dev.danperez.foursix.presenter.FourSixPresenter
-import dev.danperez.foursix.views.theme.FourSixTheme
+import dev.danperez.foursix.frontend.theme.FourSixTheme
 import dev.marcellogalhardo.retained.activity.retain
 import dev.zacsweers.metro.Inject
 

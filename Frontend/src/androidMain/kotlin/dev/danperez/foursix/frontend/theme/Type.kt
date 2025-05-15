@@ -1,4 +1,4 @@
-package dev.danperez.foursix.views.theme
+package dev.danperez.foursix.frontend.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.PlatformTextStyle
@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
-import dev.danperez.foursix.R
+import dev.danperez.foursix.frontend.R
 
 private val Montserrat = FontFamily(
     Font(R.font.montserrat_regular),

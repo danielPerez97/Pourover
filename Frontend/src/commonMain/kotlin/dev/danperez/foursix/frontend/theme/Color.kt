@@ -1,4 +1,4 @@
-package dev.danperez.foursix.views.theme
+package dev.danperez.foursix.frontend.theme
 
 import androidx.compose.ui.graphics.Color
 
