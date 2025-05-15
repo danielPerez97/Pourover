@@ -141,7 +141,7 @@ fun ControllerView(
                 StrengthRadioGroup(
                     selectedStrength = model.strength,
                     onEvent = onEvent,
-                    modifier = modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
