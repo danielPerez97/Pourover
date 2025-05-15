@@ -14,9 +14,14 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,7 +31,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.danperez.foursix.presenter.FourSixEvent
@@ -144,15 +151,33 @@ fun ControllerView(
             }
 
         }
+        val focusManager = LocalFocusManager.current
         TextField(
             value = model.grams,
             label = { Text("Beans(g)") },
+            trailingIcon = {
+                IconButton(
+                    onClick = {
+                        focusManager.clearFocus()
+                    },
+                ) {
+                    Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Close Keyboard")
+                }
+            },
             onValueChange = {
                 if(it.text.isEmpty() || it.text.matches(pattern)) {
                     onEvent(FourSixEvent.GramsChanged(it))
                 }
             },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions (
+                onDone = {
+                    focusManager.clearFocus()
+                }
+            ),
             singleLine = true,
             maxLines = 1,
             modifier = Modifier.fillMaxWidth()
