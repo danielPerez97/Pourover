@@ -2,7 +2,6 @@ package dev.danperez.foursix
 
 import android.content.Context
 import dev.danperez.foursix.di.AppScope
-import dev.danperez.foursix.di.FourSixPresenterFactory
 import dev.danperez.foursix.presenter.FourSixPresenter
 import dev.danperez.foursix.views.FourSixActivity
 import dev.zacsweers.metro.Binds
@@ -14,8 +13,8 @@ interface FourSixAppComponent
 {
     fun inject(activity: FourSixActivity)
 
-    @Binds
-    val FourSixPresenterFactory.presenterFactory: FourSixPresenter.Factory
+//    @Binds
+//    val FourSixPresenterFactory.presenterFactory: FourSixPresenter.Factory
 
     @DependencyGraph.Factory
     interface Factory

@@ -19,7 +19,7 @@ class FourSixActivity: AppCompatActivity()
 {
     @Inject lateinit var presenterFactory: FourSixPresenter.Factory
     private val presenter: FourSixPresenter by retain {
-        presenterFactory.create(it.scope, AndroidUiDispatcher.Main)
+        presenterFactory.create(it.scope.coroutineContext, AndroidUiDispatcher.Main)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

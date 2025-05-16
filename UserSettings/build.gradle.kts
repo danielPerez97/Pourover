@@ -1,5 +1,3 @@
-import co.touchlab.skie.configuration.FlowInterop
-import co.touchlab.skie.configuration.SuspendInterop
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
@@ -9,7 +7,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
     alias(libs.plugins.metro)
-    id("dev.danperez.convention.skie") apply true
 }
 
 kotlin {

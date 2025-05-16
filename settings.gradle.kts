@@ -57,6 +57,10 @@ if (System.getenv("DISABLE_PRESENTER") != "true") {
     include(":Presenter")
 }
 
+if(System.getenv("DISABLE_USERSETTINGS") != "true") {
+    include(":UserSettings")
+}
+
 val localSettings = file("local.settings.gradle.kts")
 if (localSettings.exists()) {
     apply(from = localSettings)

@@ -15,10 +15,12 @@
  */
 package dev.danperez.foursixcore
 
+import dev.zacsweers.metro.Inject
 import kotlin.math.roundToInt
 
 const val STANDARD_FIRST_POUR_RATIO = 0.5f
 
+@Inject
 class FourSixProducer {
 
     /**

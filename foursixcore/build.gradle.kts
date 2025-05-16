@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.metro)
     id("dev.danperez.convention.skie") apply true
 }
 

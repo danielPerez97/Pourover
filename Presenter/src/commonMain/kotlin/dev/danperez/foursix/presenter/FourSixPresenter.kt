@@ -4,14 +4,19 @@ import app.cash.molecule.RecompositionMode
 import app.cash.molecule.launchMolecule
 import dev.danperez.foursix.presenter.molecule.MoleculePresenter
 import dev.danperez.foursixcore.FourSixProducer
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.coroutines.CoroutineContext
 
-class FourSixPresenter(
+@Inject
+class FourSixPresenter (
     private val fourSixProducer: FourSixProducer,
-    scope: CoroutineScope
-): MoleculePresenter(scope)
+    @Assisted("scope") scope: CoroutineContext,
+    @Assisted("dispatcher") dispatcher: CoroutineContext
+): MoleculePresenter(CoroutineScope(scope + dispatcher))
 {
     private val events = MutableSharedFlow<FourSixEvent>(extraBufferCapacity = 20)
 
@@ -24,11 +29,13 @@ class FourSixPresenter(
             error("Event buffer overflow.")
         }
     }
+
+    @AssistedFactory
     interface Factory
     {
         fun create(
-            coroutineContext: CoroutineScope,
-            dispatcher: CoroutineContext,
+            @Assisted("scope") scope: CoroutineContext,
+            @Assisted("dispatcher") dispatcher: CoroutineContext,
         ): FourSixPresenter
     }
 }
