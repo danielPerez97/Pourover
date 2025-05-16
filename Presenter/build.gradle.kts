@@ -39,6 +39,7 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
                 api(libs.molecule)
+                api(project(":UserSettings"))
             }
         }
         val commonTest by getting {

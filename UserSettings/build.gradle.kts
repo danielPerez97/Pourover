@@ -18,8 +18,8 @@ kotlin {
     ).forEach { iosTarget ->
         iosTarget.binaries {
             framework {
-                baseName = "FourSixPresenterLib"
-                export(project(":foursixcore"))
+                baseName = "UserSettingsLib"
+//                export(project(":foursixcore"))
                 export(libs.molecule)
                 isStatic = true
             }
@@ -32,7 +32,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                api(project(":foursixcore"))
+//                api(project(":foursixcore"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
                 api(libs.molecule)

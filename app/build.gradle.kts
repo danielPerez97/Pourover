@@ -41,6 +41,7 @@ dependencies {
     implementation(project(":foursixcore"))
     implementation(project(":Frontend"))
     implementation(project(":Presenter"))
+    implementation(project(":UserSettings"))
 
     // Dagger
 
