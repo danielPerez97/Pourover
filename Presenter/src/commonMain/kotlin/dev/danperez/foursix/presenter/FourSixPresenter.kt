@@ -23,7 +23,7 @@ class FourSixPresenter (
     private val events = MutableSharedFlow<FourSixEvent>(extraBufferCapacity = 20)
 
     val presenter = moleculeScope.launchMolecule(mode = RecompositionMode.ContextClock) {
-        fourSixPresenter(events, fourSixProducer)
+        fourSixPresenter(events, fourSixProducer, userSettingsRepository)
     }
 
     fun take(event: FourSixEvent) {
