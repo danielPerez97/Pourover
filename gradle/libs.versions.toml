@@ -21,6 +21,7 @@ retained = "1.0.2"
 retrofit = "2.9.0"
 skie = "0.10.2-preview.2.1.20"
 sqldelight = "2.0.0"
+wire = "4.9.2"
 
 scaler-compilersdkVersion = "35"
 scaler-minsdkVersion = "28"
@@ -70,6 +71,7 @@ sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", ver
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 turbine = { module = "app.cash.turbine:turbine", version = "1.1.0" }
 viewmodelktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.1" }
+wire-runtime = { module = "com.squareup.wire:wire-runtime", version.ref = "wire" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -85,3 +87,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 metro = { id = "dev.zacsweers.metro", version = "0.3.0" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
 sqldelight = { id = "app.cash.sqldelight", version = "2.0.0" }
+wire = { id = "com.squareup.wire", version.ref = "wire" }

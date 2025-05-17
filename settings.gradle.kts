@@ -61,6 +61,10 @@ if(System.getenv("DISABLE_USERSETTINGS") != "true") {
     include(":UserSettings")
 }
 
+if(System.getenv("SCOPES") != "true") {
+    include(":Scopes")
+}
+
 val localSettings = file("local.settings.gradle.kts")
 if (localSettings.exists()) {
     apply(from = localSettings)

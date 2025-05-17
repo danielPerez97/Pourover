@@ -17,6 +17,9 @@ plugins {
 android {
     namespace = "dev.danperez.foursix.frontend"
     compileSdk = libs.versions.scaler.compilersdkVersion.get().toInt()
+    defaultConfig {
+        minSdk = libs.versions.scaler.minsdkVersion.get().toInt()
+    }
 }
 
 kotlin {

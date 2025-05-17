@@ -1,19 +1,21 @@
+import co.touchlab.skie.configuration.FlowInterop
+import co.touchlab.skie.configuration.SuspendInterop
+import co.touchlab.skie.plugin.configuration.SkieExtension
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.jb)
-    alias(libs.plugins.metro)
-    alias(libs.plugins.wire)
+    id("dev.danperez.convention.skie") apply true
     alias(libs.plugins.android.library)
-
 }
 
 android {
-    namespace = "dev.danperez.pourover.usersettings"
+    namespace = "dev.danperez.foursix.frontend"
     compileSdk = libs.versions.scaler.compilersdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.scaler.minsdkVersion.get().toInt()
@@ -22,18 +24,20 @@ android {
 
 kotlin {
     // Define targets for different platforms
-    jvm()
+    val frameworkName = "Scopes"
+    val xcf = XCFramework(frameworkName)
+
     androidTarget()
+    jvm()
     listOf(
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries {
             framework {
-                baseName = "UserSettingsLib"
-//                export(project(":foursixcore"))
-                export(libs.molecule)
+                baseName = "Scopes"
                 isStatic = true
+                xcf.add(this)
             }
         }
     }
@@ -41,17 +45,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(compose.ui)
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-//                api(project(":foursixcore"))
+                api(compose.materialIconsExtended)
+                api(compose.components.resources)
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
                 api(libs.molecule)
-                implementation(libs.okio)
-                implementation(libs.wire.runtime)
-                implementation("androidx.datastore:datastore-core-okio:1.1.6")
-                implementation(project(":Scopes"))
             }
         }
         val commonTest by getting {
@@ -63,8 +65,15 @@ kotlin {
         val darwinMain by creating {
             dependsOn(commonMain)
         }
-        iosArm64Main.get().dependsOn(darwinMain)
-        iosSimulatorArm64Main.get().dependsOn(darwinMain)
+        val iosArm64Main by getting {
+            dependsOn(darwinMain)
+            dependencies {
+//                api("app.cash.molecule:molecule-runtime-iosarm64:2.0.0")
+            }
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(darwinMain)
+        }
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
@@ -76,13 +85,6 @@ kotlin {
                 implementation(kotlin("test-junit5"))
             }
         }
-    }
-}
-
-wire {
-    kotlin {}
-    sourcePath {
-        srcDir("src/commonMain/proto")
     }
 }
 

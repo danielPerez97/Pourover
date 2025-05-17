@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package dev.danperez.pourover.usersettings.proto;
+
+message UserSettings {
+  int32 grams = 1;
+  Sweetness sweetness = 2;
+  Strength strength = 3;
+}
+
+enum Sweetness {
+  Standard = 0;
+  Sweeter = 1;
+  Brighter = 2;
+}
+
+enum Strength {
+  Lighter = 0;
+  Stronger = 1;
+  EvenStronger = 2;
+}

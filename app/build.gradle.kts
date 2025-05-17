@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":Frontend"))
     implementation(project(":Presenter"))
     implementation(project(":UserSettings"))
+    implementation(project(":Scopes"))
 
     // Dagger
 
