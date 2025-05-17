@@ -2,14 +2,12 @@ package dev.danperez.foursix
 
 import android.content.Context
 import dev.danperez.pourover.scopes.PouroverAppScope
-import dev.danperez.foursix.presenter.FourSixPresenter
 import dev.danperez.foursix.views.FourSixActivity
-import dev.zacsweers.metro.Binds
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 
 @DependencyGraph(scope = PouroverAppScope::class)
-interface FourSixAppComponent
+interface FourSixDependencyGraph
 {
     fun inject(activity: FourSixActivity)
 
@@ -21,6 +19,6 @@ interface FourSixAppComponent
     {
         fun create(
             @Provides context: Context,
-        ): FourSixAppComponent
+        ): FourSixDependencyGraph
     }
 }
