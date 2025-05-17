@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.compose.jb)
     id("dev.danperez.convention.skie") apply true
     alias(libs.plugins.android.library)
+    alias(libs.plugins.metro)
 }
 
 android {
@@ -55,6 +56,7 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.components.resources)
                 api(project(":Presenter"))
+                implementation(project(":Scopes"))
                 implementation(kotlin("stdlib-common"))
                 api(libs.kotlinx.coroutines)
                 api(libs.molecule)

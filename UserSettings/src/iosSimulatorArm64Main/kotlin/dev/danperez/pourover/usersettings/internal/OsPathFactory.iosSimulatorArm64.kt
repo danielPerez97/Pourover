@@ -13,7 +13,7 @@ import platform.Foundation.NSUserDomainMask
 
 @Inject
 @ContributesBinding(PouroverAppScope::class)
-class IOsArm64OsPathFactory: OsPathFactory
+class IOsSimulatorArm64OsPathFactory: OsPathFactory
 {
     @OptIn(ExperimentalForeignApi::class)
     override fun get(): Path {
