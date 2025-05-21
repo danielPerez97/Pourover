@@ -16,6 +16,6 @@ actual fun createDarwinPresenter(): FourSixPresenter {
         fourSixProducer = FourSixProducer(),
         scope = backgroundScope.coroutineContext,
         dispatcher = MainScope().coroutineContext,
-        userSettingsRepository = UserSettingsRepository(dataStoreFactory),
+        userSettingsRepository = UserSettingsRepository(osPathFactory),
     )
 }

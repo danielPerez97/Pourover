@@ -1,0 +1,22 @@
+import dev.danperez.pourover.usersettings.sqlite.Sweetness;
+import dev.danperez.pourover.usersettings.sqlite.Strength;
+
+CREATE TABLE PouroverUserSettings(
+    id INTEGER PRIMARY KEY, -- Enforces single row
+    grams INTEGER NOT NULL,
+    sweetness TEXT AS Sweetness NOT NULL,
+    strength TEXT AS Strength NOT NULL
+);
+
+INSERT INTO PouroverUserSettings VALUES (1, 20, "Standard", "Lighter");
+
+getSettings:
+SELECT grams, sweetness, strength FROM PouroverUserSettings WHERE id = 1;
+
+upsert:
+UPDATE PouroverUserSettings
+    SET
+        grams = :grams,
+        sweetness = :sweetness,
+        strength = :strength
+    WHERE id = 1;

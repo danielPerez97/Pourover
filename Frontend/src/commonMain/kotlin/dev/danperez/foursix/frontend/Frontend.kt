@@ -28,7 +28,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -48,6 +51,7 @@ fun Screen(
     modifier: Modifier = Modifier,
 )
 {
+    var gramsState by remember { mutableStateOf(model.grams.toString()) }
     Scaffold(
         modifier.imePadding(),
         topBar = {
@@ -57,7 +61,7 @@ fun Screen(
         }
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            Text("For ${model.grams.text} grams of coffee...")
+            Text("For ${model.grams} grams of coffee...")
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             Column(
                 modifier = Modifier
@@ -73,6 +77,8 @@ fun Screen(
                 ControllerView(
                     model = model,
                     onEvent = onEvent,
+                    gramsState = gramsState,
+                    onGramsChanged = { gramsState = it },
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -117,6 +123,8 @@ fun PoursData(
 fun ControllerView(
     model: FourSixState,
     onEvent: (FourSixEvent) -> Unit,
+    gramsState: String,
+    onGramsChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pattern = remember { Regex("^\\d+\$") }
@@ -153,7 +161,7 @@ fun ControllerView(
         }
         val focusManager = LocalFocusManager.current
         TextField(
-            value = model.grams,
+            value = gramsState,
             label = { Text("Beans(g)") },
             trailingIcon = {
                 IconButton(
@@ -165,7 +173,8 @@ fun ControllerView(
                 }
             },
             onValueChange = {
-                if(it.text.isEmpty() || it.text.matches(pattern)) {
+                onGramsChanged(it)
+                if(it.isEmpty() || it.matches(pattern)) {
                     onEvent(FourSixEvent.GramsChanged(it))
                 }
             },

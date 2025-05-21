@@ -1,66 +1,58 @@
 package dev.danperez.pourover.usersettings
 
-import androidx.datastore.core.DataStore
-import dev.danperez.pourover.usersettings.internal.DataStoreFactory
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToOne
+import dev.danperez.pourover.usersettings.sqlite.PouroverSettings
 import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class UserSettingsRepository @Inject constructor(
-    private val dataStoreFactory: DataStoreFactory
-)
-{
-    private val dataStore: DataStore<dev.danperez.pourover.usersettings.proto.UserSettings> = dataStoreFactory.get()
-    private val userSettingsFlow = MutableStateFlow(UserSettings())
+@Inject
+class UserSettingsRepository(
+    private val pouroverSettings: PouroverSettings
+) {
+    private val scope = CoroutineScope(SupervisorJob())
+    private val state: MutableStateFlow<UserSettings> = MutableStateFlow(UserSettings())
 
-    fun getUserSettings(): StateFlow<UserSettings>
-    {
-
-        return userSettingsFlow
+    init {
+        scope.launch(Dispatchers.IO) {
+            pouroverSettings
+                .pouroverUserSettingsQueries
+                .getSettings()
+                .asFlow()
+                .mapToOne(Dispatchers.IO)
+                .map {
+                    UserSettings(
+                        grams = it.grams.toInt(),
+                        sweetness = it.sweetness.toSweetness(),
+                        strength = it.strength.toStrength()
+                    )
+                }
+                .collect { newState ->
+                    println("collect: $newState")
+                    state.update { newState }
+                }
+        }
     }
 
-    suspend fun getUserSettingsFromFileSystem()
-    {
-        dataStore.data
-    }
+    fun getUserSettings(): StateFlow<UserSettings> = state
 
-    suspend fun updateData(grams: Int, sweetness: Sweetness, strength: Strength) {
-        dataStore.updateData { it ->
-            it.copy(
-                grams = grams,
-                sweetness = sweetness.toProtoSweetness(),
-                strength = strength.toProtoStrength()
+    fun updateData(userSettings: UserSettings) {
+        with(userSettings) {
+            pouroverSettings.pouroverUserSettingsQueries.upsert(
+                grams = grams.toLong(),
+                sweetness = sweetness.toSqliteSweetness(),
+                strength = strength.toSqliteStrength()
             )
         }
     }
-}
-
-private fun Strength.toProtoStrength(): dev.danperez.pourover.usersettings.proto.Strength = when(this) {
-    Strength.Lighter -> dev.danperez.pourover.usersettings.proto.Strength.Lighter
-    Strength.Stronger -> dev.danperez.pourover.usersettings.proto.Strength.Stronger
-    Strength.EvenStronger -> dev.danperez.pourover.usersettings.proto.Strength.EvenStronger
-}
-
-private fun Sweetness.toProtoSweetness(): dev.danperez.pourover.usersettings.proto.Sweetness = when(this) {
-    Sweetness.Standard -> dev.danperez.pourover.usersettings.proto.Sweetness.Standard
-    Sweetness.Sweeter -> dev.danperez.pourover.usersettings.proto.Sweetness.Sweeter
-    Sweetness.Brighter -> dev.danperez.pourover.usersettings.proto.Sweetness.Brighter
-}
-
-data class UserSettings(
-    val grams: Int = 20,
-    val sweetness: Sweetness = Sweetness.Standard,
-    val strength: Strength = Strength.Lighter,
-)
-
-enum class Sweetness {
-    Standard,
-    Sweeter,
-    Brighter
-}
-
-enum class Strength {
-    Lighter,
-    Stronger,
-    EvenStronger
 }

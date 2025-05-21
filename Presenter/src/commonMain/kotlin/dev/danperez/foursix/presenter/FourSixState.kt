@@ -1,9 +1,7 @@
 package dev.danperez.foursix.presenter
 
-import androidx.compose.ui.text.input.TextFieldValue
-
 data class FourSixState(
-    val grams: TextFieldValue = TextFieldValue(),
+    val grams: Int,
     val sweetness: Sweetness,
     val strength: Strength,
     val firstHalfPours: List<Int> = emptyList(),

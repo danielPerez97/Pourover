@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.metro)
     alias(libs.plugins.wire)
     alias(libs.plugins.android.library)
+    id("app.cash.sqldelight") version "2.1.0"
 
 }
 
@@ -17,6 +18,16 @@ android {
     compileSdk = libs.versions.scaler.compilersdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.scaler.minsdkVersion.get().toInt()
+    }
+}
+
+
+sqldelight {
+    databases {
+        create("PouroverSettings") {
+            dialect("app.cash.sqldelight:sqlite-3-24-dialect:2.1.0")
+            packageName.set("dev.danperez.pourover.usersettings.sqlite")
+        }
     }
 }
 
@@ -52,12 +63,19 @@ kotlin {
                 implementation(libs.wire.runtime)
                 implementation("androidx.datastore:datastore-core-okio:1.1.6")
                 implementation(project(":Scopes"))
+                implementation(libs.store)
+                implementation("app.cash.sqldelight:coroutines-extensions:2.1.0")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.turbine)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation("app.cash.sqldelight:android-driver:2.1.0")
             }
         }
         val darwinMain by creating {

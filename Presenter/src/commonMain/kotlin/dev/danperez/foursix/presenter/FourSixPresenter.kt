@@ -5,11 +5,12 @@ import app.cash.molecule.launchMolecule
 import dev.danperez.foursix.presenter.molecule.MoleculePresenter
 import dev.danperez.foursixcore.FourSixProducer
 import dev.danperez.pourover.usersettings.UserSettingsRepository
-import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlin.coroutines.CoroutineContext
 
 @Inject
@@ -22,7 +23,7 @@ class FourSixPresenter (
 {
     private val events = MutableSharedFlow<FourSixEvent>(extraBufferCapacity = 20)
 
-    val presenter = moleculeScope.launchMolecule(mode = RecompositionMode.ContextClock) {
+    val presenter: StateFlow<FourSixState> = moleculeScope.launchMolecule(mode = RecompositionMode.ContextClock) {
         fourSixPresenter(events, fourSixProducer, userSettingsRepository)
     }
 

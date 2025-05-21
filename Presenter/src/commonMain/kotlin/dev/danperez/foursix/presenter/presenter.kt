@@ -7,35 +7,31 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.input.TextFieldValue
 import dev.danperez.foursixcore.FourSixProducer
-import dev.danperez.foursixcore.FourSixProducer.Strength as ProducerStrength
-import dev.danperez.foursixcore.FourSixProducer.Sweetness as ProducerSweetness
 import dev.danperez.pourover.usersettings.UserSettingsRepository
 import kotlinx.coroutines.flow.Flow
+import dev.danperez.foursixcore.FourSixProducer.Strength as ProducerStrength
+import dev.danperez.foursixcore.FourSixProducer.Sweetness as ProducerSweetness
 
-import dev.danperez.pourover.usersettings.Strength as RepoStrength
-import dev.danperez.pourover.usersettings.Sweetness as RepoSweetness
+typealias RepoStrength = dev.danperez.pourover.usersettings.Strength
+typealias RepoSweetness = dev.danperez.pourover.usersettings.Sweetness
 
 @Composable
 fun fourSixPresenter(
     events: Flow<FourSixEvent>,
     fourSixProducer: FourSixProducer,
-    userSettingsRepository: UserSettingsRepository
+    userSettingsRepository: UserSettingsRepository,
 ): FourSixState {
-    val initialUserSettings by userSettingsRepository.getUserSettings().collectAsState()
-    var grams: TextFieldValue by remember { mutableStateOf(TextFieldValue(initialUserSettings.grams.toString())) }
-    var sweetness by remember { mutableStateOf(initialUserSettings.sweetness.toPresenterSweetness()) }
-    var strength by remember { mutableStateOf(initialUserSettings.strength.toPresenterStrength()) }
+    val userSettingsState by userSettingsRepository.getUserSettings().collectAsState()
     var firstHalfPours by remember { mutableStateOf(emptyList<Int>()) }
     var secondHalfPours by remember { mutableStateOf(emptyList<Int>()) }
 
-    LaunchedEffect(grams, sweetness, strength) {
-        if(grams.text.isNotEmpty()) {
+    LaunchedEffect(userSettingsState) {
+        if(userSettingsState.grams > 0) {
             val results = fourSixProducer.calculate(
-                gramsBeans = grams.text.toInt(),
-                sweetness = sweetness.toProducerSweetness(),
-                strength = strength.toProducerStrength(),
+                gramsBeans = userSettingsState.grams.toInt(),
+                sweetness = userSettingsState.sweetness.toProducerSweetness(),
+                strength = userSettingsState.strength.toProducerStrength(),
             )
             firstHalfPours = results.first
             secondHalfPours = results.second
@@ -47,26 +43,39 @@ fun fourSixPresenter(
 
     LaunchedEffect(events) {
         events.collect { event ->
+            println(event)
             when(event) {
                 is FourSixEvent.GramsChanged -> {
-                    grams = event.newGrams
+                    if(event.newGrams.isNotEmpty()) {
+                        userSettingsRepository.updateData(
+                            userSettingsState.copy(
+                                grams = event.newGrams.toInt(),
+                                sweetness = userSettingsState.sweetness,
+                                strength = userSettingsState.strength
+                            )
+                        )
+                    }
                 }
 
                 is FourSixEvent.SweetnessChanged -> {
-                    sweetness = event.sweetness
+                    userSettingsRepository.updateData(
+                        userSettingsState.copy(sweetness = event.sweetness.toRepoSweetness())
+                    )
                 }
 
                 is FourSixEvent.StrengthChanged -> {
-                    strength = event.strength
+                    userSettingsRepository.updateData(
+                        userSettingsState.copy(strength = event.strength.toRepoStrength())
+                    )
                 }
             }
         }
     }
 
     return FourSixState(
-        grams = grams,
-        sweetness = sweetness,
-        strength = strength,
+        grams = userSettingsState.grams,
+        sweetness = userSettingsState.sweetness.toPresenterSweetness(),
+        strength = userSettingsState.strength.toPresenterStrength(),
         firstHalfPours = firstHalfPours,
         secondHalfPours = secondHalfPours,
     )
@@ -84,14 +93,26 @@ fun RepoStrength.toPresenterStrength(): Strength = when(this) {
     RepoStrength.EvenStronger -> Strength.EvenStronger
 }
 
-fun Sweetness.toProducerSweetness(): ProducerSweetness = when(this) {
-    Sweetness.Standard -> ProducerSweetness.Standard
-    Sweetness.Sweeter -> ProducerSweetness.Sweeter
-    Sweetness.Brighter -> ProducerSweetness.Brighter
+fun RepoSweetness.toProducerSweetness(): ProducerSweetness = when(this) {
+    RepoSweetness.Standard -> ProducerSweetness.Standard
+    RepoSweetness.Sweeter -> ProducerSweetness.Sweeter
+    RepoSweetness.Brighter -> ProducerSweetness.Brighter
 }
 
-fun Strength.toProducerStrength(): ProducerStrength = when(this) {
-    Strength.Lighter -> ProducerStrength.Lighter
-    Strength.Stronger -> ProducerStrength.Stronger
-    Strength.EvenStronger -> ProducerStrength.EvenStronger
+fun RepoStrength.toProducerStrength(): ProducerStrength = when(this) {
+    RepoStrength.Lighter -> ProducerStrength.Lighter
+    RepoStrength.Stronger -> ProducerStrength.Stronger
+    RepoStrength.EvenStronger -> ProducerStrength.EvenStronger
+}
+
+fun Sweetness.toRepoSweetness(): RepoSweetness = when(this) {
+    Sweetness.Standard -> RepoSweetness.Standard
+    Sweetness.Sweeter -> RepoSweetness.Sweeter
+    Sweetness.Brighter -> RepoSweetness.Brighter
+}
+
+fun Strength.toRepoStrength(): RepoStrength = when(this) {
+    Strength.Lighter -> RepoStrength.Lighter
+    Strength.Stronger -> RepoStrength.Stronger
+    Strength.EvenStronger -> RepoStrength.EvenStronger
 }
