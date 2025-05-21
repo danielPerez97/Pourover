@@ -45,6 +45,7 @@ kotlin {
 //                export(project(":foursixcore"))
                 export(libs.molecule)
                 isStatic = true
+                linkerOpts.add("-lsqlite3")
             }
         }
     }
@@ -80,6 +81,9 @@ kotlin {
         }
         val darwinMain by creating {
             dependsOn(commonMain)
+            dependencies {
+                implementation("app.cash.sqldelight:native-driver:2.1.0")
+            }
         }
         iosArm64Main.get().dependsOn(darwinMain)
         iosSimulatorArm64Main.get().dependsOn(darwinMain)
